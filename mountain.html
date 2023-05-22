@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>
+        Mountains
+    </h1>
+    <select id="mountains"> 
+        <option> select a mountain</option>
+    </select>
+<div id="mountain_details">Results Will Be Here</div>
+
+</body>
+<script src="scripts/mountainData.js"></script>
+<script>
+    mountainsArray.forEach(mountain => {
+        console.log(mountain.name)
+       let mo = document.createElement("option")
+       mo.innerHTML = mountain.name
+       mo.value = mountain.name 
+       mountains.appendChild(mo)
+    });
+    function displayMountain(m){
+        return `
+        <img src="images/${m.img}">
+   <p>Description: <br>
+     ${m.desc}</p>
+    <h2> elevation: ${m.elevation} </h2>
+ `;
+    }
+    function onClickMoutain(){
+        let name = mountains.selectedOptions[0].value
+        mountainsArray.forEach(mountain => { 
+            if(mountain.name == name){
+                mountain_details.innerHTML = displayMountain(mountain)
+
+            }
+            
+        }); 
+    }
+    mountains.addEventListener("change", onClickMoutain)
+</script>
+</html>
+
